@@ -1,0 +1,17 @@
+{
+  "name": "dash-platform-mass-withdraw",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@dashevo/dashcore-lib": "^0.25.0",
+    "arg": "^5.0.2",
+    "dash-platform-sdk": "^1.1.7",
+    "ws": "^8.18.3"
+  }
+}
