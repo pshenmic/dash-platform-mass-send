@@ -78,6 +78,10 @@ const processSend = async (privateKey, proTxHash) => {
     throw new Error('Wrong private key supplied, should be purpose TRANSFER or OWNER and security level CRITICAL')
   }
 
+  if (identityPublicKey.keyId === 1 && identityPublicKey.purpose === 'OWNER' && recipient != null) {
+    throw new Error('Recipient can not be set if withdrawal happens with OWNER key')
+  }
+
   const balance = await sdk.identities.getIdentityBalance(identity.id)
   const identityNonce = (await sdk.identities.getIdentityNonce(identity.id)) + BigInt(1)
 
@@ -103,9 +107,7 @@ const processSend = async (privateKey, proTxHash) => {
 
   console.log(`Transaction hex: ${stateTransition.hex()}`)
 
-  // await stateTransition.verifyPublicKey(identityPublicKey)
-  // await stateTransition.sign(privateKey, identityPublicKey)
-  await stateTransition.signByPrivateKey(privateKey, identityPublicKey.keyId, 'ECDSA_SECP256k1')
+  await stateTransition.sign(privateKey, identityPublicKey)
 
   await sdk.stateTransitions.broadcast(stateTransition)
 
