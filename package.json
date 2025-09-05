@@ -9,9 +9,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@dashevo/dashcore-lib": "^0.25.0",
     "arg": "^5.0.2",
-    "dash-platform-sdk": "^1.1.7",
+    "dash-platform-sdk": "1.1.7",
+    "pshenmic-dpp": "1.0.23-rc.3",
     "ws": "^8.18.3"
   }
 }
