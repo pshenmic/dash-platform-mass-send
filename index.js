@@ -45,8 +45,8 @@ rd.on('line', function(line) {
       privateKey = PrivateKeyWASM.fromWIF(wifOrHex)
     }
   } catch (e) {
-    console.error('Error during importing private key, skipping')
     console.error(e)
+    console.error('Error during importing private key, skipping')
 
     return
   }
