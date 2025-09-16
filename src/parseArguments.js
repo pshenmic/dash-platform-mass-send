@@ -44,7 +44,7 @@ module.exports = function (args) {
 
   const fee = args['--fee'] != null ? BigInt(args['--fee']) : BigInt(DEFAULT_FEES[type])
 
-  const privateKeysFullPath = path.join(process.cwd(), privateKeysPath)
+  const privateKeysFullPath = path.join(privateKeysPath.startsWith('/')  ? privateKeysPath : path.join(process.cwd(), privateKeysPath))
 
   if (!fs.existsSync(privateKeysFullPath)) {
     throw new Error(`Could not find private keys file at path ${privateKeysFullPath}`)
