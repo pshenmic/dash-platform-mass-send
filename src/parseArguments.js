@@ -19,7 +19,7 @@ module.exports = function (args) {
   }
 
   if (type !== 'transfer' && type !== 'withdrawal') {
-    throw new Error(`Mass send type must be either 'transfer' or 'withdraw'`)
+    throw new Error(`Mass send type must be either 'transfer' or 'withdrawal'`)
   }
 
   if (network !== 'testnet' && network !== 'mainnet') {
