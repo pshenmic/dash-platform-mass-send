@@ -62,7 +62,7 @@ const processSend = async (privateKey, proTxHash) => {
   const identity = await fetchIdentity(sdk, privateKey.getPublicKeyHash(), proTxHash)
 
   if (identity == null) {
-    throw new Error(`Could not find identity in the network. If you do mass withdrawal try supplying proTxHash after your private key`)
+    throw new Error(`Could not find identity in the network. If you do mass withdrawal try supplying proTxHash after your private key in format privateKey:proTxHash per each line`)
   }
 
   const [identityPublicKey] = identity.getPublicKeys()
