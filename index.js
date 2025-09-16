@@ -39,10 +39,15 @@ rd.on('line', function(line) {
 
   let privateKey
 
-  if (wifOrHex.length === 32) {
-    privateKey = PrivateKeyWASM.fromHex(wifOrHex, network)
-  } else {
-    privateKey = PrivateKeyWASM.fromWIF(wifOrHex)
+  try {
+    if (wifOrHex.length === 32) {
+      privateKey = PrivateKeyWASM.fromHex(wifOrHex, network)
+    } else {
+      privateKey = PrivateKeyWASM.fromWIF(wifOrHex)
+    }
+  } catch (e) {
+    console.error('Error during importing private key')
+    console.error(e)
   }
 
   // todo check network of private key
