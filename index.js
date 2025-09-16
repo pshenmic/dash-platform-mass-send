@@ -2,7 +2,6 @@ const fs = require('fs')
 const readline = require('readline')
 const arg = require('arg')
 const { PrivateKeyWASM } = require('pshenmic-dpp')
-const { IdentityCreditTransferWASM, IdentifierWASM, IdentityCreditWithdrawalTransitionWASM, CoreScriptWASM } = require('pshenmic-dpp')
 const { DashPlatformSDK } = require('dash-platform-sdk')
 
 const parseArguments = require('./src/parseArguments')
@@ -52,7 +51,6 @@ rd.on('line', function(line) {
     return
   }
 
-
   // todo check network of private key
 
   processSend(privateKey, proTxHash)
@@ -101,14 +99,16 @@ const processSend = async (privateKey, proTxHash) => {
     throw new Error(`Not enough balance, balance: ${balance} amount to send: ${amountToSend}, fee: ${fee} ${amountToSend + fee}`)
   }
 
-  let stateTransition
+  if (amountToSend < 0n) {
+    throw new Error('Amount + fee must be above zero')
+  }
 
-  const coreScript = CoreScriptWASM.newP2PKH(sdk.utils.hexToBytes(privateKey.getPublicKeyHash()))
+  let stateTransition
 
   if (type === 'transfer') {
     stateTransition = await transfer(amountToSend, identity.id, recipient, identityNonce)
   } else if (type === 'withdrawal') {
-    stateTransition = await withdrawal(amountToSend, identity.id, identityNonce, coreScript)
+    stateTransition = await withdrawal(amountToSend, identity.id, identityNonce, recipient)
   } else {
     throw new Error('Unknown send type')
   }
