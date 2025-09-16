@@ -106,9 +106,9 @@ const processSend = async (privateKey, proTxHash) => {
   const coreScript = CoreScriptWASM.newP2PKH(sdk.utils.hexToBytes(privateKey.getPublicKeyHash()))
 
   if (type === 'transfer') {
-    stateTransition = await transfer(amount, identity.id, recipient, identityNonce)
+    stateTransition = await transfer(amountToSend, identity.id, recipient, identityNonce)
   } else if (type === 'withdrawal') {
-    stateTransition = await withdrawal(amount, identity.id, identityNonce, coreScript)
+    stateTransition = await withdrawal(amountToSend, identity.id, identityNonce, coreScript)
   } else {
     throw new Error('Unknown send type')
   }
