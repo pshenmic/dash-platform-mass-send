@@ -22,11 +22,11 @@ Prepare a list of transfer private keys in a textfile, and the script will proce
 
 #### Withdraw all credits to Dash Core (L1) address:
 
-`node index.js --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdraw`
+`node index.js --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal`
 
 #### Withdraw specific amount of credits to Dash Core (L1) address:
 
-`node index.js --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdraw --amount 10000000000`
+`node index.js --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal --amount 10000000000`
 
 #### Transfer all credits to another Platform Identity:
 `node index.js --private-keys-path private_keys.txt --network testnet --recipient CKKYnVeKoxCbvuEhiT6MDoQaRyXgDECwtxoKL5cqucZE --type transfer`
