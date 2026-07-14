@@ -1,8 +1,8 @@
 const fs = require('fs')
 const readline = require('readline')
 const arg = require('arg')
-const { PrivateKeyWASM } = require('pshenmic-dpp')
 const { DashPlatformSDK } = require('dash-platform-sdk')
+const { PrivateKeyWASM } = require('dash-platform-sdk/types')
 
 const parseArguments = require('./src/parseArguments')
 const fetchIdentity = require('./src/fetchIdentity')
@@ -52,9 +52,8 @@ rd.on('line', function(line) {
   }
 
   // todo check network of private key
-
   processSend(privateKey, proTxHash)
-    .catch((err) => console.error(`Error during processing private key (${wifOrHex.substring(0,8)}....): ${err.message ?? err.toString()}`))
+    .catch((err) => console.error(`Error during processing private key (${wifOrHex.substring(0,8)}....): ${err?.message ?? (typeof err?.toString === 'function' && err.toString()) ?? err }`))
     .finally(() => console.log())
 });
 
@@ -96,19 +95,19 @@ const processSend = async (privateKey, proTxHash) => {
   const amountToSend = (amount ? BigInt(amount) : balance) - fee
 
   if (amountToSend + fee > balance) {
-    throw new Error(`Not enough balance, balance: ${balance} amount to send: ${amountToSend}, fee: ${fee} ${amountToSend + fee}`)
+    throw new Error(`Not enough balance, balance: ${balance} amount to send: ${amountToSend}, fee: ${fee} amount with fees: ${amountToSend + fee}`)
   }
 
   if (amountToSend < 0n) {
-    throw new Error('Amount + fee must be above zero')
+    throw new Error(`Amount + fee must be above zero (current ${amountToSend})`)
   }
 
   let stateTransition
 
   if (type === 'transfer') {
-    stateTransition = await transfer(amountToSend, identity.id, recipient, identityNonce)
+    stateTransition = await transfer(sdk, amountToSend, identity.id, recipient, identityNonce)
   } else if (type === 'withdrawal') {
-    stateTransition = await withdrawal(amountToSend, identity.id, identityNonce, recipient)
+    stateTransition = await withdrawal(sdk, amountToSend, identity.id, identityNonce, recipient)
   } else {
     throw new Error('Unknown send type')
   }
