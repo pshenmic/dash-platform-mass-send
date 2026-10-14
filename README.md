@@ -11,7 +11,16 @@ Prepare a list of transfer private keys in a textfile, and the script will proce
 
 ## How to use
 
-### Prepare your folder:
+### Quick start (no install)
+
+Create a txt file `private_keys.txt` with private keys from your identities, then run
+the tool straight from npm with `npx` — paths are resolved relative to your current directory:
+
+```
+npx dash-platform-mass-send --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal
+```
+
+### From a local clone
 
 1) `git clone https://github.com/pshenmic/dash-platform-mass-send`
 2) cd `dash-platform-mass-send`
@@ -22,14 +31,14 @@ Prepare a list of transfer private keys in a textfile, and the script will proce
 
 #### Withdraw all credits to Dash Core (L1) address:
 
-`node index.js --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal`
+`npx dash-platform-mass-send --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal`
 
 #### Withdraw specific amount of credits to Dash Core (L1) address:
 
-`node index.js --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal --amount 10000000000`
+`npx dash-platform-mass-send --private-keys-path private_keys.txt --network testnet --recipient yMVL4WGPLyskTEkhF8BuYHF4R7B8Bxne2N --type withdrawal --amount 10000000000`
 
 #### Transfer all credits to another Platform Identity:
-`node index.js --private-keys-path private_keys.txt --network testnet --recipient CKKYnVeKoxCbvuEhiT6MDoQaRyXgDECwtxoKL5cqucZE --type transfer`
+`npx dash-platform-mass-send --private-keys-path private_keys.txt --network testnet --recipient CKKYnVeKoxCbvuEhiT6MDoQaRyXgDECwtxoKL5cqucZE --type transfer`
 
 #### Transfer specific amount of credits to another Platform Identity:
-`node index.js --private-keys-path private_keys.txt --network testnet --recipient HT3pUBM1Uv2mKgdPEN1gxa7A4PdsvNY89aJbdSKQb5wR --type transfer --amount 10000000`
+`npx dash-platform-mass-send --private-keys-path private_keys.txt --network testnet --recipient HT3pUBM1Uv2mKgdPEN1gxa7A4PdsvNY89aJbdSKQb5wR --type transfer --amount 10000000`
