@@ -40,7 +40,7 @@ rd.on('line', function(line) {
   let privateKey
 
   try {
-    if (wifOrHex.length === 32) {
+    if (/^[0-9a-fA-F]{64}$/.test(wifOrHex)) {
       privateKey = PrivateKeyWASM.fromHex(wifOrHex, network)
     } else {
       privateKey = PrivateKeyWASM.fromWIF(wifOrHex)
